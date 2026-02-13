@@ -1,0 +1,13 @@
+{
+  "name": "training",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n WEB,API -c auto \"yarn workspace web dev\" \"yarn workspace api dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
