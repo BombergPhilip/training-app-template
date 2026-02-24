@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model user {
+  id            Int             @id @default(autoincrement())
+  name          String?         @db.VarChar(30)
+  date_of_birth DateTime?       @db.Date
+  weight_kg     Float?
+  height_cm     Float?
+  email         String?         @unique @db.VarChar(120)
+  gender        gender_enum?
+  picture       String?         @db.VarChar(120)
+  coach         coach?
+  comments      comment[]
+  cookies       cookie[]
+  password      password?
+  clients       user_to_coach[] @relation("clientRelation")
+  coaches       user_to_coach[] @relation("coachRelation")
+
+  @@map("user")
+}
+
+model password {
+  hash    String   @db.VarChar(64)
+  user_id Int      @id
+  changed DateTime @default(now()) @db.Timestamp(6)
+  user    user     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_password_user")
+
+  @@map("password")
+}
+
+model cookie {
+  id      Int      @id @default(autoincrement())
+  hash    String   @db.VarChar(64)
+  user_id Int
+  expires DateTime @default(dbgenerated("(now() + '1 day'::interval)")) @db.Timestamp(6)
+  user    user     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_cookie_user")
+
+  @@map("cookie")
+}
+
+model coach {
+  user_id     Int  @id
+  max_clients Int? @default(20)
+  price_dkk   Int?
+  user        user @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_coach_user")
+
+  @@map("coach")
+}
+
+model user_to_coach {
+  client_id Int
+  coach_id  Int
+  status    status_enum? @default(waiting)
+  client    user         @relation("clientRelation", fields: [client_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_utc_client")
+  coach     user         @relation("coachRelation", fields: [coach_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_utc_coach")
+
+  @@id([client_id, coach_id])
+  @@map("user_to_coach")
+}
+
+model muscle_groups {
+  id                 Int                  @id @default(autoincrement())
+  name               String?              @db.VarChar(30)
+  exercise_to_muscle exercise_to_muscle[]
+
+  @@map("muscle_groups")
+}
+
+model program {
+  id           Int            @id @default(autoincrement())
+  start        DateTime?      @db.Timestamp(6)
+  end          DateTime?      @default(now()) @map("end") @db.Timestamp(6)
+  title        String?        @db.VarChar(60)
+  description  String?        @db.VarChar(120)
+  comment      String?        @db.VarChar(120)
+  log_exercise log_exercise[]
+
+  @@map("program")
+}
+
+model exercise {
+  id                 Int                  @id @default(autoincrement())
+  name               String?              @db.VarChar(30)
+  description        String?              @db.VarChar(120)
+  equipment          equipment_enum?
+  exercise_to_muscle exercise_to_muscle[]
+
+  @@map("exercise")
+}
+
+model exercise_to_muscle {
+  exercise_id   Int
+  muscle_grp_id Int
+  exercise      exercise      @relation(fields: [exercise_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_etm_exercise")
+  muscle_group  muscle_groups @relation(fields: [muscle_grp_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_etm_muscle")
+
+  @@id([exercise_id, muscle_grp_id])
+  @@map("exercise_to_muscle")
+}
+
+model log_exercise {
+  id          Int      @id @default(autoincrement())
+  program_id  Int?
+  exercise_id Int?
+  order_nr    Int?
+  reps        Int?
+  kg          Float?
+  program     program? @relation(fields: [program_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_log_program")
+
+  @@map("log_exercise")
+}
+
+model comment {
+  id        Int     @id @default(autoincrement())
+  user_id   Int?
+  attach_to Int?
+  comment   String? @db.VarChar(120)
+  user      user?   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_comment_user")
+
+  @@map("comment")
+}
+
+enum gender_enum {
+  male
+  female
+}
+
+enum status_enum {
+  accepted
+  waiting
+  declined
+}
+
+enum equipment_enum {
+  None
+  Barbell
+  Dumbbell
+  Kettlebell
+  Machine
+  Plate
+  Resistance_Band @map("Resistance Band")
+  Suspension_Band @map("Suspension Band")
+  Other
+}
