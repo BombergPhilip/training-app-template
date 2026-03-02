@@ -20,7 +20,6 @@ interface FormFieldProps<T extends FieldValues = FieldValues> {
 }
 
 const FormField = <T extends FieldValues = FieldValues>({
-  label,
   id,
   type,
   placeholder,
