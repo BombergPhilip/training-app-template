@@ -39,11 +39,6 @@ const FormField = <T extends FieldValues = FieldValues>({
 
   return (
     <div className="flex flex-col gap-2">
-      {/* {label !== "" && (
-        <label className="text-sm font-semibold text-gray-800" htmlFor={id}>
-          {label}
-        </label>
-      )} */}
       <InputGroup className={`${error ? "border-2 border-red-500" : ""}`} data-formfield="true">
         {Icon && (
           <InputGroupAddon>
