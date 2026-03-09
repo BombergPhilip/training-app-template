@@ -14,7 +14,7 @@ interface SignUpFormProps {
   error?: string;
 }
 
-const SignUpForm = ({ onSubmit, isLoading, error }: SignUpFormProps) => {
+export default function SignUpForm({ onSubmit, isLoading, error }: SignUpFormProps) {
   const { showPassword, setShowPassword } = usePasswordVisibility();
 
   const {
@@ -27,11 +27,7 @@ const SignUpForm = ({ onSubmit, isLoading, error }: SignUpFormProps) => {
   });
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6"
-      noValidate
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6" noValidate>
       <FormField
         id="fullName"
         label="Full Name"
@@ -52,7 +48,7 @@ const SignUpForm = ({ onSubmit, isLoading, error }: SignUpFormProps) => {
         error={errors.email?.message}
         autoComplete="off"
         autoCorrect="off"
-        autoCapitalize="off"
+        autoCapitalize="none"
         spellCheck={false}
         name="email"
         register={register}
@@ -81,6 +77,4 @@ const SignUpForm = ({ onSubmit, isLoading, error }: SignUpFormProps) => {
       </Button>
     </form>
   );
-};
-
-export default SignUpForm;
+}
