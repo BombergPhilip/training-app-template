@@ -29,17 +29,6 @@ model muscle_groups {
   exercise_to_muscle exercise_to_muscle[]
 }
 
-model user {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(30)
-  dateOfBirth DateTime? @db.Date
-  weightKg    Float?
-  heightCm    Float?
-  email       String    @db.VarChar(120)
-  gender      Gender?
-  picture     String?   @db.VarChar(120)
-}
-
 model user_to_coach {
   user_id  Int     @id
   coach_id Int
