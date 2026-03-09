@@ -6,135 +6,137 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
+model exercise_order {
+  id            Int             @id @default(autoincrement())
+  program_id    Int
+  exercise_id   Int
+  order_nr      Int
+  exercise_logs exercise_logs[]
+}
+
+model exercise_to_muscle {
+  exercise_id   Int
+  muscle_grp_id Int
+  exercise      exercises     @relation(fields: [exercise_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  muscle_groups muscle_groups @relation(fields: [muscle_grp_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([exercise_id, muscle_grp_id])
+}
+
+model muscle_groups {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(30)
+  exercise_to_muscle exercise_to_muscle[]
+}
+
+model user {
   id          Int       @id @default(autoincrement())
   name        String    @db.VarChar(30)
-  dateOfBirth DateTime  @db.Date
-  weightKg    Float
-  heightCm    Float
+  dateOfBirth DateTime? @db.Date
+  weightKg    Float?
+  heightCm    Float?
   email       String    @db.VarChar(120)
-  gender      Gender
+  gender      Gender?
   picture     String?   @db.VarChar(120)
-
-  @@map("user")
 }
 
-model Coach {
-  userId     Int  @id
-  priceDkk   Int?
-  maxClients Int  @default(20)
-
-  @@map("coach")
+model user_to_coach {
+  user_id  Int     @id
+  coach_id Int
+  coaches  coaches @relation(fields: [coach_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  users    users   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model UserToCoach {
-  userId  Int @id
-  coachId Int
-
-  @@map("user_to_coach")
+model users {
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(30)
+  date_of_birth DateTime?      @db.Date
+  weight_kg     Float?
+  height_cm     Float?
+  email         String         @db.VarChar(120)
+  gender        gender_type?
+  picture       String?        @db.VarChar(120)
+  coaches       coaches?
+  comments      comments[]
+  passwords     passwords[]
+  program_logs  program_logs[]
+  templates     templates[]
+  tokens        tokens[]
+  user_to_coach user_to_coach?
 }
 
-model Password {
-  hash        String   @db.VarChar(256)
-  ownerId     Int
-  lastUpdated DateTime @default(now())
-
-  @@id([hash, ownerId])
-  @@map("password")
+model coaches {
+  user_id       Int             @id
+  price_dkk     Int
+  max_clients   Int?            @default(20)
+  users         users           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user_to_coach user_to_coach[]
 }
 
-model Token {
-  hash    String   @id @db.VarChar(256)
-  owner   Int
-  expires DateTime @default(dbgenerated("(now() + '1 day'::interval)")) @db.Timestamp(6)
-  users   users    @relation(fields: [owner], references: [id], onDelete: Cascade, onUpdate: NoAction)
+model passwords {
+  hash         String    @db.VarChar(256)
+  user_id      Int
+  last_updated DateTime? @default(now()) @db.Timestamp(6)
+  users        users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-  @@map("token")
+  @@id([hash, user_id])
 }
 
-model Comment {
+model program_logs {
+  program_id Int
+  user_id    Int
+  date       DateTime @default(now()) @db.Timestamp(6)
+  programs   programs @relation(fields: [program_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([program_id, user_id, date])
+}
+
+model programs {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(30)
+  date         DateTime?      @default(now()) @db.Timestamp(6)
+  description  String         @db.VarChar(120)
+  program_logs program_logs[]
+  templates    templates?
+}
+
+model templates {
+  program_id Int      @id
+  user_id    Int
+  programs   programs @relation(fields: [program_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model tokens {
+  hash    String    @id @db.VarChar(256)
+  user_id Int
+  expires DateTime? @default(dbgenerated("(now() + '1 day'::interval)")) @db.Timestamp(6)
+  users   users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model comments {
   id        Int     @id @default(autoincrement())
   owner     Int?
   attach_id Int?
   msg       String? @db.VarChar(256)
   users     users?  @relation(fields: [owner], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@map("comment")
 }
 
-model Program {
-  id          Int      @id @default(autoincrement())
-  name        String?  @db.VarChar(30)
-  description String?  @db.VarChar(120)
-  is_template Boolean? @default(false)
-
-  @@map("program")
-}
-
-model ExerciseOrder {
-  id           Int           @id @default(autoincrement())
-  program_id   Int?
-  exercise_id  Int?
-  order_nr     Int?
-  exercise_log ExerciseLog[]
-
-  @@map("exercise_order")
-}
-
-model ExerciseLog {
+model exercise_logs {
   id                Int            @id @default(autoincrement())
-  exercise_order_id Int?
-  reps              Int?
-  kg                Float?
-  exercise_order    ExerciseOrder? @relation(fields: [exercise_order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@map("exercise_log")
+  exercise_order_id Int
+  reps              Int
+  kg                Float
+  exercise_order    exercise_order @relation(fields: [exercise_order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model Exercise {
-  id                 Int                @id @default(autoincrement())
-  name               String?            @db.VarChar(30)
-  description        String?            @db.VarChar(120)
-  equipment          equipment_type?
-  exercise_to_muscle ExerciseToMuscle[]
-
-  @@map("exercise")
-}
-
-model ExerciseToMuscle {
-  exercise_id   Int
-  muscle_grp_id Int
-  exercise      Exercise     @relation(fields: [exercise_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  muscle_groups MuscleGroups @relation(fields: [muscle_grp_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@id([exercise_id, muscle_grp_id])
-  @@map("exercise_to_muscle")
-}
-
-model MuscleGroups {
-  id                 Int                @id @default(autoincrement())
-  name               String?            @db.VarChar(30)
-  exercise_to_muscle ExerciseToMuscle[]
-
-  @@map("muscle_groups")
-}
-
-model users {
-  id            Int          @id @default(autoincrement())
-  name          String?      @db.VarChar(30)
-  date_of_birth DateTime?    @db.Date
-  weight_kg     Float?
-  height_cm     Float?
-  email         String?      @db.VarChar(120)
-  gender        gender_type?
-  picture       String?      @db.VarChar(120)
-  comment       Comment[]
-  token         Token[]
-}
-
-enum Gender {
-  male
-  female
+model exercises {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(30)
+  description        String               @db.VarChar(120)
+  equipment          equipment_type
+  exercise_to_muscle exercise_to_muscle[]
 }
 
 enum Equipment {
@@ -147,6 +149,11 @@ enum Equipment {
   Resistance_Band
   Suspension_Band
   Other
+}
+
+enum Gender {
+  male
+  female
 }
 
 enum equipment_type {
