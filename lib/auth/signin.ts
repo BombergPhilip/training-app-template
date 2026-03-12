@@ -1,7 +1,9 @@
 "use server";
 
-import { comparePassword, createToken } from "./auth";
+import { create_token } from "./auth";
+import bcrypt from "bcrypt";
 import { prisma } from "../prisma";
+import { cookies } from "next/headers";
 
 export async function signin(formData: { email: string; password: string }) {
     const { email, password } = formData;
@@ -13,12 +15,13 @@ export async function signin(formData: { email: string; password: string }) {
             include: { password: true },
         });
         if (!user) throw "User not found";
+        if (!user.password) throw "User not found"; // Burde ikke kunne ske, og det får typescript til at holde kæft
 
         // verify password
-        const valid = await comparePassword(password, user.password.hash);
+        const valid = await bcrypt.compare(password, user.password.hash);
         if (!valid) throw "Invalid password";
 
-        const { tokenStr, tokenHash } = await createToken();
+        const { tokenStr, tokenHash } = await create_token();
         await prisma.token.create({
             data: {
                 hash: tokenHash,
@@ -26,7 +29,11 @@ export async function signin(formData: { email: string; password: string }) {
             },
         });
 
-        return { result: true, tokenStr };
+        const cookieStore = await cookies();
+        cookieStore.set("token", tokenStr);
+        cookieStore.set("user", email);
+
+        return { result: true, tokenStr, email };
     } catch (error) {
         if (typeof error === "string") return { result: false, err: error };
         console.error(error);

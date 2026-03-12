@@ -1,11 +1,13 @@
 "use server";
 
 import { prisma } from "../prisma";
-import { createToken, hashPassword } from "./auth";
+import { cookies } from "next/headers";
+import { create_token } from "./auth";
+import bcrypt from "bcrypt";
 
 export async function signup(formData: { fullName: string; email: string; password: string }) {
-    const passwordHash = await hashPassword(formData.password);
-    const { tokenStr, tokenHash } = await createToken();
+    const passwordHash = await bcrypt.hash(formData.password, 10);
+    const { tokenStr, tokenHash } = await create_token();
 
     try {
         await prisma.$transaction(async (tx) => {
@@ -30,6 +32,12 @@ export async function signup(formData: { fullName: string; email: string; passwo
                 },
             });
         });
+
+        const cookieStore = await cookies();
+
+        cookieStore.set('user', formData.email);
+        cookieStore.set('token', tokenStr);
+
         return { result: true, tokenStr };
     } catch (error) {
         if (typeof error === "string") return { result: false, error };

@@ -5,8 +5,14 @@ import FormHeader from "@/features/authentication/components/FormHeader";
 import SignInForm from "@/features/authentication/components/SignInForm";
 import Layout from "@/features/authentication/layout/AuthLayout";
 import { signin } from "@/lib/auth/signin";
+import { useState } from "react";
+import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
+    const router = useRouter()
+    const [loading, setLoading] = useState(false);
+
+
     return (
         <Layout>
             <FormHeader
@@ -15,10 +21,15 @@ export default function SignInPage() {
             />
             <SignInForm
                 onSubmit={async (formData) => {
-                    const res = await signin(formData);
-                    console.log(res);
+                    setLoading(true);
+                    const resp = await signin(formData);
+                    setLoading(false);
+
+                    if (resp.result) {
+                        router.push("/")
+                    }
                 }}
-                isLoading={false}
+                isLoading={loading}
                 error={undefined}
             />
             <FooterLink message="Don't have an account?" text="Sign up" href="/auth/signup" />

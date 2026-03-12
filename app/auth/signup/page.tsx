@@ -5,17 +5,27 @@ import FormHeader from "@/features/authentication/components/FormHeader";
 import SignUpForm from "@/features/authentication/components/SignUpForm";
 import Layout from "@/features/authentication/layout/AuthLayout";
 import { signup } from "@/lib/auth/signup";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+
     return (
         <Layout>
             <FormHeader title="Create an account" description="Create an account to get started" />
             <SignUpForm
                 onSubmit={async (formData) => {
-                    let res = await signup(formData);
-                    console.log("signup res:", res);
+                    setLoading(true);
+                    const resp = await signup(formData);
+                    setLoading(false);
+
+                    if (resp.result) {
+                        router.push("/");
+                    }
                 }}
-                isLoading={false}
+                isLoading={loading}
                 error={undefined}
             />
             <FooterLink message="Already have an account?" text="Sign in" href="/auth/signin" />
