@@ -6,7 +6,7 @@ export default function HomePage() {
                 {/* Topbar */}
                 <header className="col-span-3 flex items-center justify-center border-b border-zinc-300 bg-white px-6">
                     <h1 className="text-3xl font-semibold tracking-wide">
-                        Velkommen til Hopfit - Første skridt mod en stærkere dig!
+                        Velkommen til Hopfit - Første skridt mod en stærkere dig! 💪
                     </h1>
                 </header>
 
