@@ -4,9 +4,10 @@ import FooterLink from "@/features/authentication/components/FooterLink";
 import FormHeader from "@/features/authentication/components/FormHeader";
 import SignUpForm from "@/features/authentication/components/SignUpForm";
 import Layout from "@/features/authentication/layout/AuthLayout";
-import { signup } from "@/lib/auth/signup";
+// import { signup } from "@/lib/auth/signup";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signup } from "@/app/api/auth/auth";
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -16,12 +17,12 @@ export default function SignUpPage() {
         <Layout>
             <FormHeader title="Create an account" description="Create an account to get started" />
             <SignUpForm
-                onSubmit={async (formData) => {
+                onSubmit={async ({ fullName, email, password }) => {
                     setLoading(true);
-                    const resp = await signup(formData);
+                    const resp = await signup(fullName, email, password);
                     setLoading(false);
 
-                    if (resp.result) {
+                    if (resp.success) {
                         router.push("/");
                     }
                 }}
