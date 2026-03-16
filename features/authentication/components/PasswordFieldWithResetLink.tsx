@@ -1,7 +1,7 @@
 import { FieldPath, FieldValues, UseFormRegister } from "react-hook-form";
 import { Lock } from "lucide-react";
 
-import FormField from "@/features/authentication/components/FormField";
+import FormField from "@/components/shared/FormField";
 import { usePasswordVisibility } from "@/features/authentication/hooks/usePasswordVisibility";
 
 interface PasswordFieldWithResetLinkProps<T extends FieldValues> {

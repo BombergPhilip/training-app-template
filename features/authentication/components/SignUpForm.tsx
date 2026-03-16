@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import FormField from "@/features/authentication/components/FormField";
+import FormField from "@/components/shared/FormField";
 import { usePasswordVisibility } from "@/features/authentication/hooks/usePasswordVisibility";
 import { signUpSchema, type SignUpFormData } from "@/features/authentication/schemas/zod";
 import { Lock, Mail, User } from "lucide-react";
