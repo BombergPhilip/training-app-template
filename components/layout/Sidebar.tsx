@@ -20,11 +20,12 @@ export default function Sidebar() {
                             <MenuItem icon={<GraduationCap size={20} />} title="Træner" path="/trainer" />
                             <MenuItem icon={<Building2 size={20} />} title="Hold" path="/teams" />
                             <MenuItem icon={<BicepsFlexed size={20} />} title="Øvelser" path="/exercises" />
+                            <MenuItem icon={<House size={20} />} title="Dashboard" path="/" />
                         </div>
                     </div>
                 </div>
                 <div className="border-t border-gray-200 pt-4">
-                    <MenuItem icon={<Settings size={20} />} title="Indstillinger" path="/settings" />
+                    <MenuItem icon={<Settings size={20} />} title="Indstillinger" path="/profile" />
                 </div>
             </div>
         </aside>
