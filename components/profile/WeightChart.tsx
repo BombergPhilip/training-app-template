@@ -28,7 +28,7 @@ const chartData = [
 export default function WeightChart() {
     return (
         <div className="rounded-xl bg-white p-6 shadow">
-            <h3 className="mb-4 text-lg font-semibold">Vægt udvikling</h3>
+            <h3 className="mb-4 text-lg font-semibold">weight progression</h3>
 
             <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
