@@ -1,40 +1,35 @@
+"use client";
+import * as React from "react";
+//import { Calendar } from "@/components/ui/calendar";
+import Sidebar from "@/components/layout/Sidebar";
+import Image from "next/image";
+
+
 export default function HomePage() {
 
     return (
         <main className="min-h-screen bg-zinc-100 text-zinc-900">
-            <div className="grid min-h-screen grid-cols-[220px_1fr_320px] grid-rows-[90px_1fr]">
-                {/* Topbar */}
-                <header className="col-span-3 flex items-center justify-center border-b border-zinc-300 bg-white px-6">
+            <div className="grid min-h-screen grid-cols-[280px_1fr_320px] grid-rows-[90px_1fr]">
+                {/* Sidebar */}
+                <div className="row-span-2">
+                    <Sidebar />
+                </div>
+
+                <header className="col-span-2 flex items-center justify-between border-b border-zinc-300 bg-white px-6">
+
                     <h1 className="text-3xl font-semibold tracking-wide">
                         Velkommen til Hopfit - Første skridt mod en stærkere dig! 💪
                     </h1>
+
+                    <Image
+                        src="/avatar.jpg"
+                        alt="Profil"
+                        width={56}
+                        height={56}
+                        className="h-14 w-14 rounded-full"
+                    />
+
                 </header>
-
-                {/* Left sidebar */}
-                <aside className="flex flex-col justify-between border-r border-zinc-300 bg-white p-4">
-                    <nav>
-                        <h2 className="mb-4 text-xl font-semibold">Menuer</h2>
-
-                        <ul className="space-y-3">
-                            <li className="rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3">
-                                Program
-                            </li>
-                            <li className="rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3">
-                                Træner
-                            </li>
-                            <li className="rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3">
-                                Clients
-                            </li>
-                            <li className="rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3">
-                                Hold
-                            </li>
-                        </ul>
-                    </nav>
-
-                    <button className="rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3 text-left">
-                        Indstillinger
-                    </button>
-                </aside>
 
                 {/* Center content */}
                 <section className="border-r border-zinc-300 bg-zinc-50 p-6">
@@ -71,34 +66,13 @@ export default function HomePage() {
                         <h3 className="mb-4 text-2xl font-semibold">Progress chart</h3>
 
                         <div className="flex h-[260px] items-end gap-3 rounded-xl bg-zinc-50 p-4">
-                            <div
-                                className="w-full rounded-t-md bg-zinc-300"
-                                style={{ height: "20%" }}
-                            />
-                            <div
-                                className="w-full rounded-t-md bg-zinc-400"
-                                style={{ height: "35%" }}
-                            />
-                            <div
-                                className="w-full rounded-t-md bg-zinc-300"
-                                style={{ height: "28%" }}
-                            />
-                            <div
-                                className="w-full rounded-t-md bg-zinc-400"
-                                style={{ height: "50%" }}
-                            />
-                            <div
-                                className="w-full rounded-t-md bg-zinc-300"
-                                style={{ height: "40%" }}
-                            />
-                            <div
-                                className="w-full rounded-t-md bg-zinc-400"
-                                style={{ height: "70%" }}
-                            />
-                            <div
-                                className="w-full rounded-t-md bg-zinc-500"
-                                style={{ height: "88%" }}
-                            />
+                            <div className="w-full rounded-t-md bg-zinc-300" style={{ height: "20%" }} />
+                            <div className="w-full rounded-t-md bg-zinc-400" style={{ height: "35%" }} />
+                            <div className="w-full rounded-t-md bg-zinc-300" style={{ height: "28%" }} />
+                            <div className="w-full rounded-t-md bg-zinc-400" style={{ height: "50%" }} />
+                            <div className="w-full rounded-t-md bg-zinc-300" style={{ height: "40%" }} />
+                            <div className="w-full rounded-t-md bg-zinc-400" style={{ height: "70%" }} />
+                            <div className="w-full rounded-t-md bg-zinc-500" style={{ height: "88%" }} />
                         </div>
                     </div>
                 </aside>
