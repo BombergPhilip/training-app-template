@@ -4,6 +4,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Field, FieldLabel } from "@/components/ui/field";
+import { setup } from "@/app/api/setup";
 import {
   Popover,
   PopoverContent,
@@ -23,6 +24,8 @@ export default function DatePickerSimple() {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(undefined);
   const [preview, setPreview] = React.useState<string | null>(null);
+  const [gender, setGender] = React.useState("");
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -30,6 +33,24 @@ export default function DatePickerSimple() {
 
     const imageUrl = URL.createObjectURL(file);
     setPreview(imageUrl);
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    console.log("ajsndjasndjasndjasndjas");
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    if (!date) {
+      console.log("Please select a date");
+      return;
+    }
+
+    formData.set("birthDate", date.toISOString());
+    formData.set("gender", gender);
+
+    await setup(formData);
   }
 
   return (
@@ -45,7 +66,10 @@ export default function DatePickerSimple() {
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
         </div>
 
-        <form className="w-full space-y-5 rounded-2xl border bg-white p-8 shadow-lg">
+        <form
+          className="w-full space-y-5 rounded-2xl border bg-white p-8 shadow-lg"
+          onSubmit={handleSubmit}
+        >
           <Field>
             <div className="mt-3 flex justify-center">
               <label htmlFor="picture" className="cursor-pointer">
@@ -64,7 +88,9 @@ export default function DatePickerSimple() {
             </div>
 
             <Input
+              ref={fileInputRef}
               id="picture"
+              name="pic"
               type="file"
               accept="image/*"
               className="hidden"
@@ -72,7 +98,7 @@ export default function DatePickerSimple() {
             />
 
             <FieldLabel className="block text-center">
-              Profil Picture
+              Profile Picture
             </FieldLabel>
           </Field>
 
@@ -111,6 +137,7 @@ export default function DatePickerSimple() {
             <FieldLabel htmlFor="weight">Weight</FieldLabel>
             <Input
               id="weight"
+              name="weight"
               type="number"
               placeholder="Enter weight"
               min={30}
@@ -123,6 +150,7 @@ export default function DatePickerSimple() {
             <FieldLabel htmlFor="height">Height</FieldLabel>
             <Input
               id="height"
+              name="height"
               type="number"
               placeholder="Enter height"
               min={100}
@@ -133,7 +161,7 @@ export default function DatePickerSimple() {
 
           <Field>
             <FieldLabel>Gender</FieldLabel>
-            <Select>
+            <Select onValueChange={setGender}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Choose gender" />
               </SelectTrigger>
