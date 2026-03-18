@@ -1,24 +1,45 @@
 "use client";
 import * as React from "react";
-//import { Calendar } from "@/components/ui/calendar";
 import Sidebar from "@/components/layout/Sidebar";
 import Image from "next/image";
+import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent } from "@/components/ui/card";
+import WeightChart from "@/components/profile/WeightChart";
 
-
-export default function HomePage() {
+function CalendarWeekNumbers() {
+    const [date, setDate] = React.useState<Date | undefined>(
+        new Date(new Date().getFullYear(), 1, 3)
+    );
 
     return (
+        <Card className="w-full border-0 bg-transparent shadow-none">
+            <CardContent className="p-0">
+                <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+                    <Calendar
+                        mode="single"
+                        defaultMonth={date}
+                        selected={date}
+                        onSelect={setDate}
+                        showWeekNumber
+                        className="w-full"
+                    />
+                </div>
+            </CardContent>
+        </Card>
+    );
+}
+
+export default function HomePage() {
+    return (
         <main className="min-h-screen bg-zinc-100 text-zinc-900">
-            <div className="grid min-h-screen grid-cols-[280px_1fr_320px] grid-rows-[90px_1fr]">
-                {/* Sidebar */}
+            <div className="grid min-h-screen grid-cols-[280px_1fr_340px] grid-rows-[90px_1fr]">
                 <div className="row-span-2">
                     <Sidebar />
                 </div>
 
                 <header className="col-span-2 flex items-center justify-between border-b border-zinc-300 bg-white px-6">
-
                     <h1 className="text-3xl font-semibold tracking-wide">
-                        Velkommen til Hopfit - Første skridt mod en stærkere dig! 💪
+                        Welcome to Hopfit - Your First Steps Towards a Stronger You! 💪
                     </h1>
 
                     <Image
@@ -28,51 +49,37 @@ export default function HomePage() {
                         height={56}
                         className="h-14 w-14 rounded-full"
                     />
-
                 </header>
 
-                {/* Center content */}
                 <section className="border-r border-zinc-300 bg-zinc-50 p-6">
                     <div className="flex h-full items-center justify-center rounded-2xl border border-dashed border-zinc-300 bg-white">
                         <div className="text-center">
                             <h2 className="mb-2 text-2xl font-semibold">Main content</h2>
                             <p className="text-zinc-500">
-                                Her kan du vise dagens workout, programmer eller oversigt.
+                                Here you can display today's workout, programs, or overview.
                             </p>
                         </div>
                     </div>
                 </section>
 
-                {/* Right column */}
-                <aside className="grid grid-rows-[140px_140px_1fr] gap-4 bg-white p-4">
-                    <div className="grid grid-cols-[1fr_110px] overflow-hidden rounded-2xl border border-zinc-300">
-                        <div className="p-4">
-                            <h3 className="mb-2 text-2xl font-semibold">Profile</h3>
-                            <p className="text-sm text-zinc-500">Din profil og hurtig info</p>
+                <aside className="flex flex-col gap-4 border-l border-zinc-200 bg-zinc-50 p-4">
+                    <div className="rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm">
+                        <div className="mb-4">
+                            <h3 className="text-xl font-semibold">Calender</h3>
+                            <p className="text-sm text-zinc-500">look at your upcoming events</p>
                         </div>
 
-                        <div className="flex flex-col items-center justify-center border-l border-zinc-300 bg-zinc-50 p-2">
-                            <div className="mb-2 h-16 w-16 rounded-full bg-zinc-300" />
-                            <span className="text-xs font-medium">MOTFLS</span>
+                        <CalendarWeekNumbers />
+                    </div>
+
+                    <div className="rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm">
+                        <div className="mb-4">
+                            <h3 className="text-xl font-semibold">weight progression</h3>
+                            <p className="text-sm text-zinc-500">keep track of your weight changes</p>
                         </div>
-                    </div>
 
-                    <div className="rounded-2xl border border-zinc-300 p-4">
-                        <h3 className="mb-2 text-2xl font-semibold">Kalender</h3>
-                        <p className="text-sm text-zinc-500">Vis kommende træninger og aftaler</p>
-                    </div>
-
-                    <div className="rounded-2xl border border-zinc-300 p-4">
-                        <h3 className="mb-4 text-2xl font-semibold">Progress chart</h3>
-
-                        <div className="flex h-[260px] items-end gap-3 rounded-xl bg-zinc-50 p-4">
-                            <div className="w-full rounded-t-md bg-zinc-300" style={{ height: "20%" }} />
-                            <div className="w-full rounded-t-md bg-zinc-400" style={{ height: "35%" }} />
-                            <div className="w-full rounded-t-md bg-zinc-300" style={{ height: "28%" }} />
-                            <div className="w-full rounded-t-md bg-zinc-400" style={{ height: "50%" }} />
-                            <div className="w-full rounded-t-md bg-zinc-300" style={{ height: "40%" }} />
-                            <div className="w-full rounded-t-md bg-zinc-400" style={{ height: "70%" }} />
-                            <div className="w-full rounded-t-md bg-zinc-500" style={{ height: "88%" }} />
+                        <div className="rounded-2xl bg-zinc-50 p-3">
+                            <WeightChart />
                         </div>
                     </div>
                 </aside>
