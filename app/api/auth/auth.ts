@@ -81,6 +81,10 @@ export async function signin(
     },
   });
 
+  const cookieStore = await cookies();
+  cookieStore.set("user", email);
+  cookieStore.set("token", tokenStr);
+
   // cache
   cached_tokens.set(email + tokenStr, new Date());
   return { success: true, token: tokenStr };
@@ -155,7 +159,6 @@ export async function signup(
     });
 
     const cookieStore = await cookies();
-
     cookieStore.set("user", email);
     cookieStore.set("token", tokenStr);
 
