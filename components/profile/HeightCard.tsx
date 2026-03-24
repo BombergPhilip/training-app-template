@@ -13,7 +13,7 @@ export default function HeightCard() {
 
     return (
         <div className="rounded-xl bg-white p-6 shadow">
-            <h3 className="mb-3 text-lg font-semibold">Højde</h3>
+            <h3 className="mb-3 text-lg font-semibold">height</h3>
 
             <div className="flex gap-3">
                 <input
@@ -28,12 +28,12 @@ export default function HeightCard() {
                     onClick={saveHeight}
                     className="rounded-lg bg-black px-4 py-2 text-white"
                 >
-                    Gem
+                    save
                 </button>
             </div>
 
             <p className="mt-3 text-sm text-gray-500">
-                Nuværende højde: <span className="font-medium">{savedHeight} cm</span>
+                Current height: <span className="font-medium">{savedHeight} cm</span>
             </p>
         </div>
     )

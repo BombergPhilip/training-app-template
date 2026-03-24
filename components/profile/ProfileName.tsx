@@ -5,7 +5,7 @@ export default function ProfileName() {
                 Thomas Jensen
             </h2>
             <p className="text-sm text-gray-500">
-                Klient
+                Client
             </p>
         </div>
     )
