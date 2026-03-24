@@ -21,12 +21,12 @@ const ExercisePage = () => {
     } = useExerciseFilters();
 
     return (
-        <div className="flex h-screen w-full">
+        <div className="flex min-h-screen w-full flex-col lg:flex-row">
             <Sidebar />
             <div className="flex flex-1 min-w-0 flex-col">
                 <Header />
-                <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 px-10 pt-5">
-                    <div className="flex justify-between">
+                <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 p-4 sm:px-10 sm:pt-5">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <ExerciseFilterPopover
                             filterLevels={filterLevels}
                             filterTypes={filterTypes}
@@ -39,7 +39,7 @@ const ExercisePage = () => {
                         selectedIds={filterMuscleGroupIds}
                         onToggle={toggleMuscleGroup}
                     />
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 w-full">
                         {
                             EXERCISE_IN_MEMORY_DATA.filter(matchesFilters)
                                 .map((ex) => (

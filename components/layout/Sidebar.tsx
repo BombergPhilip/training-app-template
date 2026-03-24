@@ -4,7 +4,7 @@ import { MenuItem } from "../shared/MenuItem"
 
 export default function Sidebar() {
     return (
-        <aside className="flex flex-col h-screen w-[280px] shrink-0 py-6 px-6 bg-white gap-12 border-r border-gray-200">
+        <aside className="flex flex-col h-full w-full lg:h-screen lg:w-[280px] shrink-0 py-4 sm:py-6 px-4 sm:px-6 bg-white gap-8 lg:gap-12 border-b border-gray-200 lg:border-b-0 lg:border-r">
             <div className="flex items-center gap-2 h-fit w-full">
                 <Image src={"/logo.svg"} alt="" width={36} height={36} className="h-10 w-10 " />
                 <div className="text-gray-900 text-xl font-bold font-sans uppercase">Work It</div>
