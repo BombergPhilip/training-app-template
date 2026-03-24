@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import FormField from "@/components/shared/FormField";
 import { Controller, type Control, type FieldErrors, type UseFormRegister } from "react-hook-form";
 import { DialogClose } from "@/components/ui/dialog";
-import DropdownSelect from "@/features/exercise/components/DropdownSelect";
-import type { AddExerciseFormData } from "@/features/exercise/schemas/zod";
+import DropdownSelect from "@/app/exercises/components/DropdownSelect";
+import type { AddExerciseFormData } from "@/app/exercises/schemas/zod";
 import {
     EXERCISE_TYPE_OPTIONS,
     LEVEL_OPTIONS,
     PRIMARY_MUSCLE_OPTIONS,
-} from "@/features/exercise/config/exerciseFormOptions";
+} from "@/app/exercises/config/exerciseFormOptions";
 
 /*
 AddExerciseForm er en UI-komponent, der bruges til at oprette en ny øvelse i systemet.

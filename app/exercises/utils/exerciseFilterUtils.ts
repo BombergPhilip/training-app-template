@@ -1,4 +1,4 @@
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
+import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/exercises/types";
 
 
 /*

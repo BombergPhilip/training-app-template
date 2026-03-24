@@ -4,7 +4,7 @@ import { signin } from "./app/api/auth/auth";
 
 // Whitelist side
 // Routes, som en besøgende browser ikke må befinde sig på medmindre at de er logget ind :)
-const blacklist = ["/profile"];
+const blacklist = ["/profile", "/exercises"];
 
 function url_on_blacklist(url: string): boolean {
     return blacklist.some((route) => url.includes(route));

@@ -11,45 +11,40 @@ import { Button } from "@/components/ui/button"
 
 export default function ProfileDashboard() {
     return (
-        <div className="flex h-screen w-full">
+        <div className="flex flex-1 min-w-0 flex-col">
+            <div className="flex justify-end">
+                <Button variant="destructive">Log out</Button>
+            </div>
+            <Image
+                src="/avatar.jpg"
+                alt="Profil"
+                width={200}
+                height={200}
+                className="mx-auto mt-10 rounded-full"
+            />
 
-            <Sidebar />
-
-            <div className="flex flex-1 min-w-0 flex-col">
-                <div className="flex justify-end">
-                    <Button variant="destructive">Log out</Button>
-                </div>
-                <Image
-                    src="/avatar.jpg"
-                    alt="Profil"
-                    width={200}
-                    height={200}
-                    className="mx-auto mt-10 rounded-full"
-                />
-
-                <ProfileName />
+            <ProfileName />
 
 
-                <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 px-10 pt-10">
+            <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 px-10 pt-10">
 
-                    <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-6">
 
-                        <WeightCard />
+                    <WeightCard />
 
-                        <div className="row-span-2">
-                            <WeightChart />
-                        </div>
-
-                        <HeightCard />
-
-
-
-
+                    <div className="row-span-2">
+                        <WeightChart />
                     </div>
 
-                </main>
+                    <HeightCard />
 
-            </div>
+
+
+
+                </div>
+
+            </main>
+
         </div>
     )
 }

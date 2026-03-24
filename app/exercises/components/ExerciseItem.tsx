@@ -1,11 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { Pencil, Trash2 } from "lucide-react";
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
+import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/exercises/types";
 import {
     EXERCISE_LEVEL_CONFIG,
     EXERCISE_TYPE_CONFIG,
     PRIMARY_MUSCLE_LABELS,
-} from "@/features/exercise/config/exerciseDisplayConfig";
+} from "@/app/exercises/config/exerciseDisplayConfig";
 
 /*
 ExerciseItem er en UI-komponent, der bruges til at vise en øvelse i systemet.

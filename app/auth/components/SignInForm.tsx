@@ -4,9 +4,9 @@ import FormField from "@/components/shared/FormField";
 import { Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInSchema, type SignInFormData } from "@/features/authentication/schemas/zod";
+import { signInSchema, type SignInFormData } from "@/app/auth/schemas/zod";
 import { Button } from "@/components/ui/button";
-import PasswordFieldWithResetLink from "@/features/authentication/components/PasswordFieldWithResetLink";
+import PasswordFieldWithResetLink from "@/app/auth/components/PasswordFieldWithResetLink";
 
 interface SignInFormProps {
     onSubmit: (data: SignInFormData) => void;
