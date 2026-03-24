@@ -1,5 +1,3 @@
-import * as React from "react";
-
 interface EmailTemplateProps {
     firstname: string;
     otp: string;
@@ -8,7 +6,7 @@ interface EmailTemplateProps {
 export function EmailTemplate({ firstname, otp }: EmailTemplateProps) {
     return (
         <div>
-            <h1>: Welcome, {firstname}!</h1>
+            <h1>Welcome, {firstname}!</h1>
             <p>Your one time password: {otp}</p>
         </div>
     );
