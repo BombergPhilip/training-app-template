@@ -1,6 +1,6 @@
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
+import type { ExerciseEquipment, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
 import {
-    EXERCISE_LEVEL_CONFIG,
+    EXERCISE_EQUIPMENT_CONFIG,
     EXERCISE_TYPE_CONFIG,
     PRIMARY_MUSCLE_LABELS,
 } from "@/features/exercise/config/exerciseDisplayConfig";
@@ -24,9 +24,9 @@ export const EXERCISE_TYPE_OPTIONS: { label: string; value: ExerciseType }[] = (
 ).map(([value, config]) => ({ label: config.label, value }));
 
 /*
-LEVEL_OPTIONS er en liste af objekter, der definerer de mulige valg for niveau.
+EQUIPMENT_OPTIONS er en liste af objekter, der definerer de mulige valg for udstyr.
 Det indeholder label og value properties, der definerer de mulige valg.
 */
-export const LEVEL_OPTIONS: { label: string; value: ExerciseLevel }[] = (
-    Object.entries(EXERCISE_LEVEL_CONFIG) as [ExerciseLevel, { label: string }][]
+export const EQUIPMENT_OPTIONS: { label: string; value: ExerciseEquipment }[] = (
+    Object.entries(EXERCISE_EQUIPMENT_CONFIG) as [ExerciseEquipment, { label: string }][]
 ).map(([value, config]) => ({ label: config.label, value }));

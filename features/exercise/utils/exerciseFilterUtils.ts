@@ -1,4 +1,4 @@
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
+import type { ExerciseEquipment, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
 
 
 /*
@@ -15,20 +15,20 @@ export const MUSCLE_GROUP_TO_PRIMARY: Record<string, PrimaryMuscle[]> = {
 
 /*
 ExerciseFilterState er en objekt, der definerer filtreringsstaten for øvelser.
-Det indeholder filterLevels, filterTypes og filterMuscleGroupIds.
+Det indeholder filterEquipment, filterTypes og filterMuscleGroupIds.
 */
 export type ExerciseFilterState = {
-    filterLevels: ExerciseLevel[];
+    filterEquipment: ExerciseEquipment[];
     filterTypes: ExerciseType[];
     filterMuscleGroupIds: string[];
 };
 
 /*
 ExerciseFilterItem er en objekt, der definerer en øvelse.
-Det indeholder level, exerciseType og primaryMuscle.
+Det indeholder equipment, exerciseType og primaryMuscle.
 */
 export type ExerciseFilterItem = {
-    level: ExerciseLevel;
+    equipment: ExerciseEquipment;
     exerciseType: ExerciseType;
     primaryMuscle: PrimaryMuscle;
 };
@@ -36,13 +36,13 @@ export type ExerciseFilterItem = {
 
 /*
 matchesExerciseFilters er en funktion, der checker om en øvelse matcher filtrene.
-Det checker om niveauet, træningstypen og primære musklerne matcher filtrene.
+Det checker om udstyret, træningstypen og primære musklerne matcher filtrene.
 */
 export const matchesExerciseFilters = (
     filters: ExerciseFilterState,
     item: ExerciseFilterItem
 ): boolean => {
-    if (filters.filterLevels.length > 0 && !filters.filterLevels.includes(item.level)) return false;
+    if (filters.filterEquipment.length > 0 && !filters.filterEquipment.includes(item.equipment)) return false;
     if (filters.filterTypes.length > 0 && !filters.filterTypes.includes(item.exerciseType)) return false;
 
     if (filters.filterMuscleGroupIds.length > 0) {

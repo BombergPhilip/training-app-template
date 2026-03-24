@@ -2,37 +2,37 @@
 
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import type { ExerciseLevel, ExerciseType } from "@/features/exercise/types";
+import type { ExerciseEquipment, ExerciseType } from "@/features/exercise/types";
 import {
-    EXERCISE_LEVEL_CONFIG,
+    EXERCISE_EQUIPMENT_CONFIG,
     EXERCISE_TYPE_CONFIG,
-    LEVEL_OPTIONS,
+    EQUIPMENT_OPTIONS,
     TYPE_OPTIONS,
 } from "@/features/exercise/config/exerciseDisplayConfig";
 import { ChevronDown, ListFilter } from "lucide-react";
 
 /*
-ExerciseFilterPopover er en UI-komponent, der bruges til at filtrere øvelser baseret på niveau og type.
-Den bruger Popover-komponenten fra ShadCN UI til at vælge filtre (komponenenten er i components/ui folderen).
+ExerciseFilterPopover er en UI-komponent, der bruges til at filtrere øvelser baseret på udstyr og type.
+Den bruger Popover-komponenten fra ShadCN UI til at vælge filtre (komponent er i components/ui folderen).
 
 Komponent modtager en række props som er defineret i interface ExerciseFilterPopoverProps.
-- filterLevels: En liste af niveauer, der er valgt.
+- filterEquipment: En liste af udstyr, der er valgt.
 - filterTypes: En liste af typer, der er valgt.
-- onToggleLevel: En funktion der kaldes når et niveau vælges.
+- onToggleEquipment: En funktion der kaldes når et udstyr vælges.
 - onToggleType: En funktion der kaldes når en træningstype vælges.
 */
 
 type ExerciseFilterPopoverProps = {
-    filterLevels: ExerciseLevel[];
+    filterEquipment: ExerciseEquipment[];
     filterTypes: ExerciseType[];
-    onToggleLevel: (level: ExerciseLevel) => void;
+    onToggleEquipment: (equipment: ExerciseEquipment) => void;
     onToggleType: (type: ExerciseType) => void;
 };
 
 const ExerciseFilterPopover = ({
-    filterLevels,
+    filterEquipment,
     filterTypes,
-    onToggleLevel,
+    onToggleEquipment,
     onToggleType,
 }: ExerciseFilterPopoverProps) => {
     return (
@@ -50,16 +50,16 @@ const ExerciseFilterPopover = ({
             <PopoverContent align="start" className="w-72 rounded-xl border-gray-200 bg-white p-5 shadow-lg">
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
-                        <h3 className="text-sm font-bold text-gray-800">Niveau</h3>
+                        <h3 className="text-sm font-bold text-gray-800">Udstyr</h3>
                         <div className="flex flex-wrap gap-2">
-                            {LEVEL_OPTIONS.map((level) => {
-                                const config = EXERCISE_LEVEL_CONFIG[level];
-                                const isSelected = filterLevels.includes(level);
+                            {EQUIPMENT_OPTIONS.map((equipment) => {
+                                const config = EXERCISE_EQUIPMENT_CONFIG[equipment];
+                                const isSelected = filterEquipment.includes(equipment);
                                 return (
                                     <button
-                                        key={level}
+                                        key={equipment}
                                         type="button"
-                                        onClick={() => onToggleLevel(level)}
+                                        onClick={() => onToggleEquipment(equipment)}
                                         className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-colors ${isSelected ? config.className : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700"}`}
                                     >
                                         {config.label}

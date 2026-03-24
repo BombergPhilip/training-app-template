@@ -11,10 +11,10 @@ import { EXERCISE_IN_MEMORY_DATA } from "@/features/exercise/data/ExerciseInMemo
 
 const ExercisePage = () => {
     const {
-        filterLevels,
+        filterEquipment,
         filterTypes,
         filterMuscleGroupIds,
-        toggleLevel,
+        toggleEquipment,
         toggleType,
         toggleMuscleGroup,
         matchesFilters,
@@ -28,9 +28,9 @@ const ExercisePage = () => {
                 <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 p-4 sm:px-10 sm:pt-5">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <ExerciseFilterPopover
-                            filterLevels={filterLevels}
+                            filterEquipment={filterEquipment}
                             filterTypes={filterTypes}
-                            onToggleLevel={toggleLevel}
+                            onToggleEquipment={toggleEquipment}
                             onToggleType={toggleType}
                         />
                         <AddExercise />
@@ -48,7 +48,7 @@ const ExercisePage = () => {
                                         exerciseType={ex.exerciseType}
                                         name={ex.name}
                                         primaryMuscle={ex.primaryMuscle}
-                                        level={ex.level}
+                                        equipment={ex.equipment}
                                     />
                                 ))}
                     </div>

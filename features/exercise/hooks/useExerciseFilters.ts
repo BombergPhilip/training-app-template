@@ -1,22 +1,22 @@
 import { useCallback, useState } from "react";
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
+import type { ExerciseEquipment, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
 import { matchesExerciseFilters } from "@/features/exercise/utils/exerciseFilterUtils";
 
 
 /*
-useExerciseFilters er en hook, der håndterer filtrering af øvelser baseret på niveau, type og muskelgruppe.
+useExerciseFilters er en hook, der håndterer filtrering af øvelser baseret på udstyr, type og muskelgruppe.
 
 UseCallback bruges til at optimisere performance ved at cache funktionen og kun kalde den igen, hvis dependencies ændrer sig.
 toggleLevel, toggleType og toggleMuscleGroup har ikke dependencies, da de ikke afhænger af nogen andre værdier.
 */
 const useExerciseFilters = () => {
-    const [filterLevels, setFilterLevels] = useState<ExerciseLevel[]>([]);
+    const [filterEquipment, setFilterEquipment] = useState<ExerciseEquipment[]>([]);
     const [filterTypes, setFilterTypes] = useState<ExerciseType[]>([]);
     const [filterMuscleGroupIds, setFilterMuscleGroupIds] = useState<string[]>([]);
 
-    const toggleLevel = useCallback((level: ExerciseLevel) => {
-        setFilterLevels((prev) =>
-            prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
+    const toggleEquipment = useCallback((equipment: ExerciseEquipment) => {
+        setFilterEquipment((prev) =>
+            prev.includes(equipment) ? prev.filter((e) => e !== equipment) : [...prev, equipment]
         );
     }, []);
 
@@ -33,19 +33,19 @@ const useExerciseFilters = () => {
     }, []);
 
     const matchesFilters = useCallback(
-        (item: { level: ExerciseLevel; exerciseType: ExerciseType; primaryMuscle: PrimaryMuscle }) =>
+        (item: { equipment: ExerciseEquipment; exerciseType: ExerciseType; primaryMuscle: PrimaryMuscle }) =>
             matchesExerciseFilters(
-                { filterLevels, filterTypes, filterMuscleGroupIds },
+                { filterEquipment, filterTypes, filterMuscleGroupIds },
                 item
             ),
-        [filterLevels, filterTypes, filterMuscleGroupIds]
+        [filterEquipment, filterTypes, filterMuscleGroupIds]
     );
 
     return {
-        filterLevels,
+        filterEquipment,
         filterTypes,
         filterMuscleGroupIds,
-        toggleLevel,
+        toggleEquipment,
         toggleType,
         toggleMuscleGroup,
         matchesFilters,

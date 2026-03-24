@@ -1,23 +1,23 @@
 import { Badge } from "@/components/ui/badge";
 import { Pencil, Trash2 } from "lucide-react";
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
+import type { ExerciseEquipment, ExerciseType, PrimaryMuscle } from "@/features/exercise/types";
 import {
-    EXERCISE_LEVEL_CONFIG,
+    EXERCISE_EQUIPMENT_CONFIG,
     EXERCISE_TYPE_CONFIG,
     PRIMARY_MUSCLE_LABELS,
 } from "@/features/exercise/config/exerciseDisplayConfig";
 
 /*
 ExerciseItem er en UI-komponent, der bruges til at vise en øvelse i systemet.
-Den bruger Badge-komponenten fra ShadCN UI til at vise niveau og træningstype (komponenenten er i components/ui folderen).
+Den bruger Badge-komponenten fra ShadCN UI til at vise udstyr og træningstype (komponenenten er i components/ui folderen).
 
 Komponent modtager en række props som er defineret i interface ExerciseProps.
 - name: Navnet på øvelsen.
 - primaryMuscle: Primær muskel for øvelsen.
 - exerciseType: Træningstype for øvelsen.
-- level: Niveau for øvelsen.
+- equipment: Udstyr for øvelsen.
 
-Komponenten viser navnet på øvelsen, primær muskel, træningstype og niveau.
+Komponenten viser navnet på øvelsen, primær muskel, træningstype og udstyr.
 Der er også knapper til at redigere og slette øvelsen.
 */
 
@@ -26,13 +26,13 @@ interface ExerciseProps {
     name?: string;
     primaryMuscle?: PrimaryMuscle;
     exerciseType: ExerciseType;
-    level?: ExerciseLevel;
+    equipment?: ExerciseEquipment;
 };
 
-const ExerciseItem = ({ name, primaryMuscle, exerciseType, level }: ExerciseProps) => {
+const ExerciseItem = ({ name, primaryMuscle, exerciseType, equipment }: ExerciseProps) => {
     const typeConfig = EXERCISE_TYPE_CONFIG[exerciseType];
     const TypeIcon = typeConfig.icon;
-    const levelConfig = level ? EXERCISE_LEVEL_CONFIG[level] : null;
+    const equipmentConfig = equipment ? EXERCISE_EQUIPMENT_CONFIG[equipment] : null;
     const primaryMuscleLabel = primaryMuscle ? PRIMARY_MUSCLE_LABELS[primaryMuscle] : null;
 
     return (
@@ -47,9 +47,9 @@ const ExerciseItem = ({ name, primaryMuscle, exerciseType, level }: ExerciseProp
                     <TypeIcon size={12} className="opacity-80" />
                     {typeConfig.label}
                 </span>
-                {levelConfig && (
-                    <Badge className={`rounded-full border-0 px-3 py-1 text-xs font-medium ${levelConfig.className}`}>
-                        {levelConfig.label}
+                {equipmentConfig && (
+                    <Badge className={`rounded-full border-0 px-3 py-1 text-xs font-medium ${equipmentConfig.className}`}>
+                        {equipmentConfig.label}
                     </Badge>
                 )}
             </div>
