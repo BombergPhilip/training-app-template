@@ -1,15 +1,30 @@
-"use client"
-import { useState } from "react"
+"use client";
 
-export default function WeightCard() {
+import { useState } from "react";
 
-    const [weight, setWeight] = useState("")
-    const [savedWeight, setSavedWeight] = useState("75")
+type WeightCardProps = {
+    currentWeight: number | null;
+    onSave: (weight: number) => Promise<void>;
+    saving: boolean;
+};
 
-    const saveWeight = () => {
-        setSavedWeight(weight)
-        setWeight("")
-    }
+export default function WeightCard({
+    currentWeight,
+    onSave,
+    saving,
+}: WeightCardProps) {
+    const [weight, setWeight] = useState("");
+
+    const saveWeight = async () => {
+        const numericWeight = Number(weight);
+
+        if (!Number.isFinite(numericWeight) || numericWeight <= 0) {
+            return;
+        }
+
+        await onSave(numericWeight);
+        setWeight("");
+    };
 
     return (
         <div className="rounded-xl bg-white p-6 shadow">
@@ -26,15 +41,19 @@ export default function WeightCard() {
 
                 <button
                     onClick={saveWeight}
-                    className="rounded-lg bg-black px-4 py-2 text-white"
+                    disabled={saving}
+                    className="rounded-lg bg-black px-4 py-2 text-white disabled:opacity-50"
                 >
-                    save
+                    {saving ? "saving..." : "save"}
                 </button>
             </div>
 
             <p className="mt-3 text-sm text-gray-500">
-                Current weight: <span className="font-medium">{savedWeight} kg</span>
+                Current weight:{" "}
+                <span className="font-medium">
+                    {currentWeight !== null ? `${currentWeight} kg` : "-"}
+                </span>
             </p>
         </div>
-    )
+    );
 }

@@ -75,11 +75,11 @@ export default function HomePage() {
                     <div className="rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm">
                         <div className="mb-4">
                             <h3 className="text-xl font-semibold">weight progression</h3>
-                            <p className="text-sm text-zinc-500">keep track of your weight changes</p>
+                            <p className="text-sm text-zinc-500">keep track of </p>
                         </div>
 
                         <div className="rounded-2xl bg-zinc-50 p-3">
-                            <WeightChart />
+                            <WeightChart data={[]} loading={false} />
                         </div>
                     </div>
                 </aside>
