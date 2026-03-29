@@ -30,15 +30,17 @@ export const EXERCISE_TYPE_CONFIG: Record<
     mobility: { label: "Mobilitet", icon: Activity, className: "bg-violet-100 text-violet-800" },
 };
 
-export const EXERCISE_LEVEL_CONFIG: Record<ExerciseLevel, { label: string; className: string }> = {
-    beginner: { label: "Let", className: "bg-emerald-100 text-emerald-800" },
-    intermediate: { label: "Mellem", className: "bg-amber-100 text-amber-800" },
-    advanced: { label: "Svær", className: "bg-rose-100 text-rose-800" },
+export const EXERCISE_EQUIPMENT_CONFIG: Record<ExerciseEquipment, { label: string; className: string }> = {
+    none: { label: "Ingen udstyr", className: "bg-slate-100 text-slate-800" },
+    bodyweight: { label: "Kropsvægt", className: "bg-emerald-100 text-emerald-800" },
+    dumbbell: { label: "Håndvægte", className: "bg-amber-100 text-amber-800" },
+    barbell: { label: "Stang", className: "bg-rose-100 text-rose-800" },
+    machine: { label: "Maskine", className: "bg-indigo-100 text-indigo-800" },
 };
 
 /*
-LEVEL_OPTIONS OG TYPE_OPTIONS er lister af niveauer og typer, der bruges i ExerciseFilterPopover.tsx komponenten.
+EQUIPMENT_OPTIONS OG TYPE_OPTIONS er lister af udstyr og typer, der bruges i ExerciseFilterPopover.tsx komponenten.
 */
-export const LEVEL_OPTIONS: ExerciseLevel[] = Object.keys(EXERCISE_LEVEL_CONFIG) as ExerciseLevel[];
+export const EQUIPMENT_OPTIONS: ExerciseEquipment[] = Object.keys(EXERCISE_EQUIPMENT_CONFIG) as ExerciseEquipment[];
 
 export const TYPE_OPTIONS: ExerciseType[] = Object.keys(EXERCISE_TYPE_CONFIG) as ExerciseType[];

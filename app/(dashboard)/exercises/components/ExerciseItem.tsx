@@ -2,22 +2,22 @@ import { Badge } from "@/components/ui/badge";
 import { Pencil, Trash2 } from "lucide-react";
 import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/(dashboard)/exercises/types";
 import {
-    EXERCISE_LEVEL_CONFIG,
+    EXERCISE_EQUIPMENT_CONFIG,
     EXERCISE_TYPE_CONFIG,
     PRIMARY_MUSCLE_LABELS,
 } from "@/app/(dashboard)/exercises/config/exerciseDisplayConfig";
 
 /*
 ExerciseItem er en UI-komponent, der bruges til at vise en øvelse i systemet.
-Den bruger Badge-komponenten fra ShadCN UI til at vise niveau og træningstype (komponenenten er i components/ui folderen).
+Den bruger Badge-komponenten fra ShadCN UI til at vise udstyr og træningstype (komponenenten er i components/ui folderen).
 
 Komponent modtager en række props som er defineret i interface ExerciseProps.
 - name: Navnet på øvelsen.
 - primaryMuscle: Primær muskel for øvelsen.
 - exerciseType: Træningstype for øvelsen.
-- level: Niveau for øvelsen.
+- equipment: Udstyr for øvelsen.
 
-Komponenten viser navnet på øvelsen, primær muskel, træningstype og niveau.
+Komponenten viser navnet på øvelsen, primær muskel, træningstype og udstyr.
 Der er også knapper til at redigere og slette øvelsen.
 */
 
@@ -26,30 +26,30 @@ interface ExerciseProps {
     name?: string;
     primaryMuscle?: PrimaryMuscle;
     exerciseType: ExerciseType;
-    level?: ExerciseLevel;
+    equipment?: ExerciseEquipment;
 };
 
-const ExerciseItem = ({ name, primaryMuscle, exerciseType, level }: ExerciseProps) => {
+const ExerciseItem = ({ name, primaryMuscle, exerciseType, equipment }: ExerciseProps) => {
     const typeConfig = EXERCISE_TYPE_CONFIG[exerciseType];
     const TypeIcon = typeConfig.icon;
-    const levelConfig = level ? EXERCISE_LEVEL_CONFIG[level] : null;
+    const equipmentConfig = equipment ? EXERCISE_EQUIPMENT_CONFIG[equipment] : null;
     const primaryMuscleLabel = primaryMuscle ? PRIMARY_MUSCLE_LABELS[primaryMuscle] : null;
 
     return (
-        <div className="flex items-center gap-6 rounded-xl border border-gray-200 bg-white px-6 py-5">
+        <div className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-4 md:flex-row md:items-center md:px-6 md:py-5">
             <div className="flex min-w-0 flex-1 flex-col gap-1">
-                <h3 className="text-base font-semibold text-gray-900">{name}</h3>
+                <h3 className="text-base font-semibold text-gray-900 truncate">{name}</h3>
                 {primaryMuscleLabel && <p className="text-sm text-gray-500">{primaryMuscleLabel}</p>}
             </div>
 
-            <div className="flex flex-1 flex-wrap items-center justify-center gap-2">
+            <div className="flex flex-1 flex-wrap items-center justify-start gap-2">
                 <span className={`inline-flex items-center gap-1.5 rounded-full border-0 px-3 py-1 text-xs font-medium ${typeConfig.className}`}>
                     <TypeIcon size={12} className="opacity-80" />
                     {typeConfig.label}
                 </span>
-                {levelConfig && (
-                    <Badge className={`rounded-full border-0 px-3 py-1 text-xs font-medium ${levelConfig.className}`}>
-                        {levelConfig.label}
+                {equipmentConfig && (
+                    <Badge className={`rounded-full border-0 px-3 py-1 text-xs font-medium ${equipmentConfig.className}`}>
+                        {equipmentConfig.label}
                     </Badge>
                 )}
             </div>

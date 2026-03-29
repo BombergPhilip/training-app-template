@@ -21,7 +21,7 @@ const AddExercise = () => {
             name: "",
             primaryMuscle: undefined,
             exerciseType: undefined,
-            level: undefined,
+            equipment: undefined,
         },
     });
 

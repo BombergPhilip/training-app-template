@@ -8,13 +8,13 @@ import DropdownSelect from "@/app/(dashboard)/exercises/components/DropdownSelec
 import type { AddExerciseFormData } from "@/app/(dashboard)/exercises/schemas/zod";
 import {
     EXERCISE_TYPE_OPTIONS,
-    LEVEL_OPTIONS,
+    EQUIPMENT_OPTIONS,
     PRIMARY_MUSCLE_OPTIONS,
 } from "@/app/(dashboard)/exercises/config/exerciseFormOptions";
 
 /*
 AddExerciseForm er en UI-komponent, der bruges til at oprette en ny øvelse i systemet.
-Den indeholder felter til navn, primær muskel, type og niveau, og håndterer validering af brugerinput.
+Den indeholder felter til navn, primær muskel, type og udstyr, og håndterer validering af brugerinput.
 Formularen benytter react-hook-form til håndtering af formularstatus og valideringsfejl.
 
 Komponent modtager en række props som er defineret i interface AddExerciseFormProps.
@@ -95,25 +95,25 @@ const AddExerciseForm = ({ register, control, errors, onSubmit }: AddExerciseFor
                     )}
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label className="text-gray-800 font-medium" htmlFor="level">
-                        Niveau
+                    <label className="text-gray-800 font-medium" htmlFor="equipment">
+                        Udstyr
                     </label>
                     <Controller
-                        name="level"
+                        name="equipment"
                         control={control}
                         render={({ field }) => (
                             <DropdownSelect
-                                placeholder="Vælg niveau"
-                                options={LEVEL_OPTIONS}
+                                placeholder="Vælg udstyr"
+                                options={EQUIPMENT_OPTIONS}
                                 value={field.value}
                                 onValueChange={field.onChange}
                                 onBlur={field.onBlur}
-                                error={!!errors.level}
+                                error={!!errors.equipment}
                             />
                         )}
                     />
-                    {errors.level?.message && (
-                        <p className="text-sm font-medium text-red-500">{errors.level.message}</p>
+                    {errors.equipment?.message && (
+                        <p className="text-sm font-medium text-red-500">{errors.equipment.message}</p>
                     )}
                 </div>
             </div>
