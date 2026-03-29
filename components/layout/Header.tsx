@@ -21,7 +21,7 @@ export default function Header() {
     const description = config?.description ?? "Velkommen tilbage, Thomas!"
 
     return (
-        <header className="shrink-0 bg-gray-100 items-center flex px-10 justify-between py-6">
+        <header className="shrink-0 bg-gray-100 items-center hidden lg:flex px-10 justify-between pt-6">
             <div className="flex flex-col">
                 <h1 className="text-xl font-semibold text-gray-900">{title}</h1>
                 <p className="text-sm text-gray-500">{description}</p>

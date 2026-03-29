@@ -4,6 +4,7 @@ import "../../app/globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
+import MobileHeaderWithNav from "@/components/layout/MobileHeaderWithNav";
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -29,7 +30,8 @@ export default function RootLayout({
                     <Sidebar />
                     <div className="flex flex-1 min-w-0 flex-col">
                         <Header />
-                        <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 px-10 pt-5">
+                        <MobileHeaderWithNav />
+                        <main className="flex flex-1 flex-col gap-6 overflow-auto bg-gray-100 px-10 pt-12">
                             {children}
                         </main>
                     </div>

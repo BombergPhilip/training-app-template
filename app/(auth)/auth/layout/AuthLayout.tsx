@@ -1,6 +1,6 @@
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <main className="flex min-h-screen items-center justify-center bg-gray-100 px-4 py-8">
+        <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4 py-8">
             <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
                 <div className="mb-7 flex items-center justify-center gap-4">
                     <div className="h-px w-24 bg-linear-to-r from-transparent via-gray-300 to-transparent" />
@@ -13,7 +13,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <div className="w-full flex flex-col gap-7">{children}</div>
             </div>
-        </main>
+        </div>
     );
 };
 
