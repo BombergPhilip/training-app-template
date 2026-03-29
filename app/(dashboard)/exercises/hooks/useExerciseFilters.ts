@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/exercises/types";
-import { matchesExerciseFilters } from "@/app/exercises/utils/exerciseFilterUtils";
+import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/(dashboard)/exercises/types";
+import { matchesExerciseFilters } from "@/app/(dashboard)/exercises/utils/exerciseFilterUtils";
 
 
 /*

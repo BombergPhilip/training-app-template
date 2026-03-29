@@ -1,4 +1,4 @@
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/exercises/types";
+import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/(dashboard)/exercises/types";
 
 
 /*

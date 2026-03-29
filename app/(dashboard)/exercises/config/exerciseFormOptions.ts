@@ -1,9 +1,9 @@
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/exercises/types";
+import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/(dashboard)/exercises/types";
 import {
     EXERCISE_LEVEL_CONFIG,
     EXERCISE_TYPE_CONFIG,
     PRIMARY_MUSCLE_LABELS,
-} from "@/app/exercises/config/exerciseDisplayConfig";
+} from "@/app/(dashboard)/exercises/config/exerciseDisplayConfig";
 
 /*
 PRIMARY_MUSCLE_OPTIONS er en liste af objekter, der definerer de mulige valg for primær muskel.

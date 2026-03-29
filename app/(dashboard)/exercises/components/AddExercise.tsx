@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddExerciseFormData, addExerciseSchema } from "@/app/exercises/schemas/zod";
-import AddExerciseForm from "@/app/exercises/components/AddExerciseForm";
+import { AddExerciseFormData, addExerciseSchema } from "@/app/(dashboard)/exercises/schemas/zod";
+import AddExerciseForm from "@/app/(dashboard)/exercises/components/AddExerciseForm";
 
 /*
 AddExercise er en container-komponen som ejer state og logik for at tilføje en ny øvelse til systemet 

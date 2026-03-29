@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import FormField from "@/components/shared/FormField";
-import { usePasswordVisibility } from "@/app/auth/hooks/usePasswordVisibility";
-import { signUpSchema, type SignUpFormData } from "@/app/auth/schemas/zod";
+import { usePasswordVisibility } from "@/app/(auth)/auth/hooks/usePasswordVisibility";
+import { signUpSchema, type SignUpFormData } from "@/app/(auth)/auth/schemas/zod";
 import { Lock, Mail, User } from "lucide-react";
 
 interface SignUpFormProps {

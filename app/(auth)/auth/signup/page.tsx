@@ -1,14 +1,14 @@
 "use client";
 
-import FooterLink from "@/app/auth/components/FooterLink";
-import FormHeader from "@/app/auth/components/FormHeader";
-import SignUpForm from "@/app/auth/components/SignUpForm";
-import Layout from "@/app/auth/layout/AuthLayout";
+import FooterLink from "@/app/(auth)/auth/components/FooterLink";
+import FormHeader from "@/app/(auth)/auth/components/FormHeader";
+import SignUpForm from "@/app/(auth)/auth/components/SignUpForm";
+import Layout from "@/app/(auth)/auth/layout/AuthLayout";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { signup } from "@/app/api/auth/auth";
-import { OTPForm } from "./components/dialog";
+import { OTPForm } from "../components/dialog";
 
 export default function SignUpPage() {
   const router = useRouter();

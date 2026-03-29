@@ -1,9 +1,9 @@
 "use client";
 
-import FooterLink from "@/app/auth/components/FooterLink";
-import FormHeader from "@/app/auth/components/FormHeader";
-import SignInForm from "@/app/auth/components/SignInForm";
-import Layout from "@/app/auth/layout/AuthLayout";
+import FooterLink from "@/app/(auth)/auth/components/FooterLink";
+import FormHeader from "@/app/(auth)/auth/components/FormHeader";
+import SignInForm from "@/app/(auth)/auth/components/SignInForm";
+import Layout from "@/app/(auth)/auth/layout/AuthLayout";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 import { signin } from "@/app/api/auth/auth";

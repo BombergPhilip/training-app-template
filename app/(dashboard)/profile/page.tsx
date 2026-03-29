@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Image from "next/image";
 
-import ProfileName from "@/components/profile/ProfileName";
-import WeightCard from "@/components/profile/WeightCard";
-import HeightCard from "@/components/profile/HeightCard";
-import WeightChart from "@/components/profile/WeightChart";
+import ProfileName from "@/app/(dashboard)/profile/components/ProfileName";
+import WeightCard from "@/app/(dashboard)/profile/components/WeightCard";
+import HeightCard from "@/app/(dashboard)/profile/components/HeightCard";
+import WeightChart from "@/app/(dashboard)/profile/components/WeightChart";
 import { Button } from "@/components/ui/button";
 
 type WeightLog = {

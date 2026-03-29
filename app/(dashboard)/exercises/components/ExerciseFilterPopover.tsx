@@ -2,13 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import type { ExerciseLevel, ExerciseType } from "@/app/exercises/types";
+import type { ExerciseLevel, ExerciseType } from "@/app/(dashboard)/exercises/types";
 import {
     EXERCISE_LEVEL_CONFIG,
     EXERCISE_TYPE_CONFIG,
     LEVEL_OPTIONS,
     TYPE_OPTIONS,
-} from "@/app/exercises/config/exerciseDisplayConfig";
+} from "@/app/(dashboard)/exercises/config/exerciseDisplayConfig";
 import { ChevronDown, ListFilter } from "lucide-react";
 
 /*

@@ -2,12 +2,12 @@
 
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-import Exercise from "@/app/exercises/components/ExerciseItem";
-import MuscleGroupsFilter from "@/app/exercises/components/MuscleGroupsFilter";
-import AddExercise from "@/app/exercises/components/AddExercise";
-import ExerciseFilterPopover from "@/app/exercises/components/ExerciseFilterPopover";
-import useExerciseFilters from "@/app/exercises/hooks/useExerciseFilters";
-import { EXERCISE_IN_MEMORY_DATA } from "@/app/exercises/data/ExerciseInMemoryData";
+import Exercise from "@/app/(dashboard)/exercises/components/ExerciseItem";
+import MuscleGroupsFilter from "@/app/(dashboard)/exercises/components/MuscleGroupsFilter";
+import AddExercise from "@/app/(dashboard)/exercises/components/AddExercise";
+import ExerciseFilterPopover from "@/app/(dashboard)/exercises/components/ExerciseFilterPopover";
+import useExerciseFilters from "@/app/(dashboard)/exercises/hooks/useExerciseFilters";
+import { EXERCISE_IN_MEMORY_DATA } from "@/app/(dashboard)/exercises/data/ExerciseInMemoryData";
 
 const ExercisePage = () => {
     const {

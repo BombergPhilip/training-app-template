@@ -1,5 +1,5 @@
 import { Activity, Dumbbell, Heart, Zap } from "lucide-react";
-import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/exercises/types";
+import type { ExerciseLevel, ExerciseType, PrimaryMuscle } from "@/app/(dashboard)/exercises/types";
 
 /**
  * Visningskonfiguration for øvelser: danske labels, ikoner og farver til UI.

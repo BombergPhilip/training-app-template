@@ -1,6 +1,6 @@
 "use server";
 
-import { EmailTemplate } from "@/app/auth/signup/mail_template";
+import { EmailTemplate } from "@/app/(auth)/auth/components/mail_template";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import crypto from "crypto";

@@ -1,4 +1,4 @@
-import { ExerciseLevel, ExerciseType } from "../types";
+import { ExerciseLevel, ExerciseType } from "@/app/(dashboard)/exercises/types";
 
 // TODO: Udskift med data fra database (det her er midlertidige data)
 
