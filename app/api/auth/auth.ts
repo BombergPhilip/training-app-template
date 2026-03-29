@@ -83,6 +83,11 @@ export async function signin(
 
   // cache
   cached_tokens.set(email + tokenStr, new Date());
+
+  const cookieStore = await cookies();
+  cookieStore.set("user", email);
+  cookieStore.set("token", tokenStr);
+
   return { success: true, token: tokenStr };
 }
 
